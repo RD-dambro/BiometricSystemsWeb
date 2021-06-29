@@ -4,6 +4,8 @@ Before you begin:
 
 you need a database, possibly postgres, set up
 
+https://hub.docker.com/_/postgres/
+
 create ormconfig.json
 
 {
