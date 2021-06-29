@@ -1,13 +1,6 @@
-import { Producer } from '../rabbit'
 import { Device } from "../entity/Device";
 import { myController } from "./controller";
 
-const producer = new Producer({
-    exchange: 'message',
-    exchange_type: 'topic',
-    queue: 'queue_name',
-    key: 'uid1.state'
-})
 
 const controller = new myController(Device)
 
@@ -60,15 +53,5 @@ router.route('/:id/:relation/:rid')
     .delete(async(req, res) => {
         res.json(await controller.deleteRelation(req.params.id, req.params.relation, req.params.rid))  
     });
-
-router.route('/state/:id')
-    .post(async (req, res) => {
-        const id = req.params.id;
-        const device = await Device.findOne(id)
-        const { state } = req.body
-        producer.publish(state)
-        console.log(state)
-        return res.json(state)
-    })
 
 module.exports = router
