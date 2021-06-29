@@ -23,3 +23,5 @@ npm install
 then:
 
 npm test
+
+if it asks about rabbit, comment the refences
