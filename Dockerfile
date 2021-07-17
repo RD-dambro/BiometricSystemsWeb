@@ -6,15 +6,15 @@ WORKDIR /usr/src/web
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN npm install
+# RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
 # COPY ./ormconfig.json .
-COPY ./.env .
+# COPY ./.env .
 # ENV TYPEORM_CONNECTION postgres
 # ENV TYPEORM_DATABASE  postgres
 # ENV TYPEORM_HOST  localhost
@@ -23,7 +23,12 @@ COPY ./.env .
 # ENV TYPEORM_PORT  5432
 # ENV TYPEORM_ENTITIES  dest/entity/*.js
 # ENV TYPEORM_SYNCHRONIZE  true
-COPY ./dest ./dest
 
-CMD [ "npm", "start" ]
+COPY . .
+
+RUN npm install
+
+# RUN tsc
+
+CMD [ "npm", "test" ]
 EXPOSE 3000
